@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MoveController : MonoBehaviour {
 
-    public float Speed = 2f;
-    public float Accelerate = 5;
+    public float BasicSpeed = 10f;
+    public float SpeedToTurnMultipler = 0.5f;
+    public int ThresholdSpeedSec = 30;
+    public float[] SpeedMultiplers;
     public float Bounds = 1.5f;
 
-    DateTime _started;
+    private DateTime _startTime;
 
     private void Start()
     {
-        _started = DateTime.UtcNow;
+        _startTime = DateTime.UtcNow;
     }
 
     void FixedUpdate ()
@@ -22,9 +25,33 @@ public class MoveController : MonoBehaviour {
         {
             return;
         }
-        Vector3 newPosition = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), Accelerate * Time.deltaTime * (float)(DateTime.UtcNow - _started).TotalSeconds / 2 );
-        newPosition = newPosition * Speed * Time.deltaTime;
+        transform.position = GetNewPosition();
+    }
+    
+    private Vector3 GetNewPosition()
+    {
+        float speedMultipler = GetSpeedMultipler();
+        Vector3 newPosition = new Vector3(
+            Input.GetAxis("Horizontal") * speedMultipler * SpeedToTurnMultipler, 
+            Input.GetAxis("Vertical") * speedMultipler * SpeedToTurnMultipler, 
+            BasicSpeed * speedMultipler * Time.fixedDeltaTime);
         Vector3 dest = transform.position + newPosition;
+        return BoundsVector(dest);
+    }
+
+    private float GetSpeedMultipler()
+    {
+        int totalSec = (int)(DateTime.UtcNow - _startTime).TotalSeconds;
+        int threshold = totalSec / ThresholdSpeedSec;
+        if (threshold < SpeedMultiplers.Length)
+        {
+            return SpeedMultiplers[threshold];
+        }
+        return SpeedMultiplers.Last();
+    }
+
+    private Vector3 BoundsVector(Vector3 dest)
+    {
         float x = dest.x;
         float y = dest.y;
         if (x > 0)
@@ -43,6 +70,6 @@ public class MoveController : MonoBehaviour {
         {
             y = Math.Max(-Bounds, y);
         }
-        transform.position = new Vector3(x,y,dest.z);
+        return new Vector3(x, y, dest.z);
     }
 }
