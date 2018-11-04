@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CollisionController : MonoBehaviour
 {
-    public GameObject ToShow;
     public bool IsGameOver;
 
     private void OnCollisionEnter(Collision collision)
@@ -12,7 +11,17 @@ public class CollisionController : MonoBehaviour
         if (collision.gameObject.GetComponent<Wall>() != null)
         {
             IsGameOver = true;
-            ToShow.SetActive(true);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        BonusPoint bonus = other.GetComponent<BonusPoint>();
+        if (bonus != null)
+        {
+            GetComponent<PointsController>().AddPoints(bonus.Points);
+            GameObject.Destroy(bonus.gameObject);
+            return;
         }
     }
 
