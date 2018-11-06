@@ -1,28 +1,48 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CollisionController : MonoBehaviour
 {
     public bool IsGameOver;
-
-    private void OnCollisionEnter(Collision collision)
+    
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.GetComponent<Wall>() != null)
+        if (ProceedBonusPoint(other))
         {
-            IsGameOver = true;
+            return;
+        }
+        if (ProceedWall(other))
+        {
+            return;
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private bool ProceedWall(Collider other)
+    {
+        Wall wall = other.GetComponent<Wall>();
+        if (wall != null)
+        {
+            Shape playerShape = GetComponent<ShapeController>().CurrentShape;
+            if( wall.AcceptableShapes.Any(x => x == playerShape) == false)
+            {
+                IsGameOver = true;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private bool ProceedBonusPoint(Collider other)
     {
         BonusPoint bonus = other.GetComponent<BonusPoint>();
         if (bonus != null)
         {
             GetComponent<PointsController>().AddPoints(bonus.Points);
             GameObject.Destroy(bonus.gameObject);
-            return;
+            return true;
         }
+        return false;
     }
-
 }

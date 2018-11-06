@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wall : MonoBehaviour
+public enum Shape
 {
-    public Shape[] AcceptableShapes;
+    Circle,
+    Square
 }
