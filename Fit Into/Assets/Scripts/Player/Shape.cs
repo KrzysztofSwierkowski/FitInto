@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum Shape
 {
-    Circle,
-    Square
+    Sphere,
+    Cube,
+    Cylinder
 }
