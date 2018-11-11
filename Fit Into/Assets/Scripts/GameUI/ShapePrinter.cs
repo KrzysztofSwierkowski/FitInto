@@ -15,7 +15,7 @@ public class ShapePrinter : MonoBehaviour
         {
             _shapeController = GameObject.FindObjectOfType<ShapeController>();
         }
-        GetComponent<Text>().text = "Next shape: " + _shapeController.NextShape.ToString() + "\nIn: " + _shapeController.TimeLeftToChange + " sec";
+        GetComponent<Text>().text = "Next shape after " + _shapeController.WallsToNextShape + " walls";
 
     }
 }

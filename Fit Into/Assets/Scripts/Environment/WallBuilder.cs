@@ -6,9 +6,33 @@ using UnityEngine;
 
 public class WallBuilder : MonoBehaviour
 {
-    public GameObject[] WallPrefabs;
+    [Serializable]
+    public class WallChangeScheme
+    {
+        [SerializeField]
+        public GameObject[] WallPrefabs;
+        [SerializeField]
+        public int WallsToChange;
+    }
+    public WallChangeScheme[] Schemes;
+    
+    public void DecrementWallCounter()
+    {
+        _wallsToChangeScheme--;
+        if (_wallsToChangeScheme <= 0)
+        {
+            _schemeNumber++;
+            ChangeScheme();
+        }
+    }
 
-	private void Update ()
+    private void Start()
+    {
+        _schemeNumber = 0;
+        ChangeScheme();
+    }
+
+    private void Update ()
     {
         GenerateWalls();
         DestroyWalls();
@@ -53,14 +77,32 @@ public class WallBuilder : MonoBehaviour
         System.Random random = new System.Random((int)DateTime.UtcNow.Ticks);
         foreach(Rail rail in EnvSettings.RailsDefinitions)
         {
-            GameObject segment = GameObject.Instantiate(WallPrefabs[random.Next(0, WallPrefabs.Length)], wall.transform);
+            GameObject segment = GameObject.Instantiate(_currentPrefabs[random.Next(0, _currentPrefabs.Length)], wall.transform);
             segment.transform.localPosition = new Vector3(rail.WorldPositionX, rail.WorldPositionY, 0);
         }
         return wall;
     }
 
 
+    private void ChangeScheme()
+    {
+        if (_schemeNumber >= Schemes.Length)
+        {
+            _currentPrefabs = Schemes.Last().WallPrefabs;
+            _wallsToChangeScheme = Schemes.Last().WallsToChange;
+        }
+        else
+        {
+            _currentPrefabs = Schemes[_schemeNumber].WallPrefabs;
+            _wallsToChangeScheme = Schemes[_schemeNumber].WallsToChange;
+        }
+    }
 
+
+
+    private int _schemeNumber;
+    private int _wallsToChangeScheme;
+    private GameObject[] _currentPrefabs;
     private MoveController _moveController;
     private MoveController MoveController
     {

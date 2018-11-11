@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ShapeController : MonoBehaviour
@@ -14,46 +15,60 @@ public class ShapeController : MonoBehaviour
         public GameObject Object;
     }
 
-    public Shape CurrentShape;
-    public Shape NextShape;
+    [Serializable]
+    public class ShapeChangeScheme
+    {
+        [SerializeField]
+        public ShapeMap[] PossibleShapes;
+        [SerializeField]
+        public int WallsToChange;
+    }
 
-    public float TimeToChange;
-    public float TimeLeftToChange;
+    public ShapeChangeScheme[] Schemes;
+    public Shape CurrentShape { get; private set; }
+    public int WallsToNextShape { get; private set; }
+    private int _schemeNumber;
 
-    public ShapeMap[] ShapeObjects;
+    public void DecrementWallCounter()
+    {
+        WallsToNextShape--;
+        if (WallsToNextShape <= 0)
+        {
+            ++_schemeNumber;
+            ChangeShape();
+        }
+    }
 
 	// Use this for initialization
 	void Start ()
     {
-        CurrentShape = Shape.Sphere;
-        TimeLeftToChange = TimeToChange;
+        _schemeNumber = 0;
+        ChangeShape();
     }
-	
-	// Update is called once per frame
-	void Update ()
-    {
-        TimeLeftToChange -= Time.deltaTime;
-        if (TimeLeftToChange <= 0)
-        {
-            ChangeShape();
-        }
-	}
+
 
     private void ChangeShape()
     {
-        TimeLeftToChange = TimeToChange;
-        CurrentShape = NextShape;
+        ShapeChangeScheme scheme = null;
+        if (_schemeNumber >= Schemes.Length)
+        {
+            scheme = Schemes.Last();
+        }
+        else
+        {
+            scheme = Schemes[_schemeNumber];
+        }
+        WallsToNextShape = scheme.WallsToChange;
         System.Random random = new System.Random((int)DateTime.UtcNow.Ticks);
-        List<Shape> allShapes = new List<Shape>();
-        foreach(Shape shape in Enum.GetValues(typeof(Shape)))
+        ShapeMap shape = scheme.PossibleShapes[random.Next(0, scheme.PossibleShapes.Length)];
+        CurrentShape = shape.Shape;
+        foreach(var sch in Schemes)
         {
-            allShapes.Add(shape);
+            foreach(var obj in sch.PossibleShapes.Select(x => x.Object))
+            {
+                obj.SetActive(false);
+            }
         }
-        allShapes.Remove(CurrentShape);
-        NextShape = allShapes[random.Next(0, allShapes.Count)];
-        foreach(var shapeMap in ShapeObjects)
-        {
-            shapeMap.Object.SetActive(shapeMap.Shape == CurrentShape);
-        }
+        shape.Object.SetActive(true);
     }
 }
