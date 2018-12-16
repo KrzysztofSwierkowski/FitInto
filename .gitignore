@@ -37,3 +37,4 @@ sysinfo.txt
 *.unitypackage
 /Releases
 /Fit Into/Assets/Excluded_Ext_Resources
+/Fit Into/Stats.txt

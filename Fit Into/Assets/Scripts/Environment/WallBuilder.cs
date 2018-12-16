@@ -75,10 +75,21 @@ public class WallBuilder : MonoBehaviour
         GameObject wall = new GameObject("Wall z:" + positionToGenerate);
         wall.transform.position = new Vector3(0, 0, positionToGenerate);
         System.Random random = new System.Random((int)DateTime.UtcNow.Ticks);
+        List<GameObject> generatedWalls = new List<GameObject>();
         foreach(Rail rail in EnvSettings.RailsDefinitions)
         {
             GameObject segment = GameObject.Instantiate(_currentPrefabs[random.Next(0, _currentPrefabs.Length)], wall.transform);
             segment.transform.localPosition = new Vector3(rail.WorldPositionX, rail.WorldPositionY, 0);
+            generatedWalls.Add(segment);
+        }
+        // TODO: To nie przewiduje zmiany kształtu. Będzie trzeba to jakoś rozwiązać
+        if (generatedWalls.Any(x => x.GetComponent<Wall>().AcceptShape(ShapeController.CurrentShape)) == false)
+        {
+            Debug.Log("Need to fix walls.");
+            GameObject oneOfWalls = generatedWalls[random.Next(0, generatedWalls.Count)];
+            GameObject segment = GameObject.Instantiate(_currentPrefabs.First(x => x.GetComponent<Wall>().AcceptShape(ShapeController.CurrentShape)), wall.transform);
+            segment.transform.localPosition = oneOfWalls.transform.localPosition;
+            GameObject.Destroy(oneOfWalls);
         }
         return wall;
     }
@@ -113,6 +124,18 @@ public class WallBuilder : MonoBehaviour
                 _moveController = GameObject.FindObjectOfType<MoveController>();
             }
             return _moveController;
+        }
+    }
+    private ShapeController _shapeController;
+    private ShapeController ShapeController
+    {
+        get
+        {
+            if (null == _shapeController)
+            {
+                _shapeController = GameObject.FindObjectOfType<ShapeController>();
+            }
+            return _shapeController;
         }
     }
     private EnvironmentSettings _envSettings;
