@@ -26,6 +26,15 @@ public class ShapeController : MonoBehaviour
 
     public ShapeChangeScheme[] Schemes;
     public Shape CurrentShape { get; private set; }
+    public Shape NextShape
+    {
+        get
+        {
+            return NextShapeMap.Shape;
+        }
+    }
+    public ShapeMap NextShapeMap { get; private set; }
+
     public int WallsToNextShape { get; private set; }
     private int _schemeNumber;
 
@@ -43,24 +52,14 @@ public class ShapeController : MonoBehaviour
 	void Start ()
     {
         _schemeNumber = 0;
+        ChooseNextShape(_schemeNumber);
         ChangeShape();
     }
 
 
     private void ChangeShape()
     {
-        ShapeChangeScheme scheme = null;
-        if (_schemeNumber >= Schemes.Length)
-        {
-            scheme = Schemes.Last();
-        }
-        else
-        {
-            scheme = Schemes[_schemeNumber];
-        }
-        WallsToNextShape = scheme.WallsToChange;
-        System.Random random = new System.Random((int)DateTime.UtcNow.Ticks);
-        ShapeMap shape = scheme.PossibleShapes[random.Next(0, scheme.PossibleShapes.Length)];
+        ShapeMap shape = NextShapeMap;
         CurrentShape = shape.Shape;
         foreach(var sch in Schemes)
         {
@@ -70,5 +69,22 @@ public class ShapeController : MonoBehaviour
             }
         }
         shape.Object.SetActive(true);
+        ChooseNextShape(_schemeNumber + 1);
+    }
+
+    private void ChooseNextShape(int shemeNumber)
+    {
+        ShapeChangeScheme scheme = null;
+        if (shemeNumber >= Schemes.Length)
+        {
+            scheme = Schemes.Last();
+        }
+        else
+        {
+            scheme = Schemes[shemeNumber];
+        }
+        WallsToNextShape = scheme.WallsToChange;
+        System.Random random = new System.Random((int)DateTime.UtcNow.Ticks);
+        NextShapeMap = scheme.PossibleShapes[random.Next(0, scheme.PossibleShapes.Length)];
     }
 }

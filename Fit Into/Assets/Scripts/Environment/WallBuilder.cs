@@ -82,18 +82,32 @@ public class WallBuilder : MonoBehaviour
             segment.transform.localPosition = new Vector3(rail.WorldPositionX, rail.WorldPositionY, 0);
             generatedWalls.Add(segment);
         }
-        // TODO: To nie przewiduje zmiany kształtu. Będzie trzeba to jakoś rozwiązać
-        if (generatedWalls.Any(x => x.GetComponent<Wall>().AcceptShape(ShapeController.CurrentShape)) == false)
-        {
-            Debug.Log("Need to fix walls.");
-            GameObject oneOfWalls = generatedWalls[random.Next(0, generatedWalls.Count)];
-            GameObject segment = GameObject.Instantiate(_currentPrefabs.First(x => x.GetComponent<Wall>().AcceptShape(ShapeController.CurrentShape)), wall.transform);
-            segment.transform.localPosition = oneOfWalls.transform.localPosition;
-            GameObject.Destroy(oneOfWalls);
-        }
+        FixWall(wall, generatedWalls, positionToGenerate);
         return wall;
     }
 
+    private void FixWall(GameObject wall, List<GameObject> generatedWalls, int positionToGenerate)
+    {
+        int generatedInFront = (int)((positionToGenerate - MoveController.transform.position.z) / EnvSettings.DistanceBetweenWalls);
+        Shape shape = Shape.Cone;
+        if (ShapeController.WallsToNextShape < generatedInFront)
+        {
+            shape = ShapeController.NextShape;
+        }
+        else
+        {
+            shape = ShapeController.CurrentShape;
+        }
+        if (generatedWalls.Any(x => x.GetComponent<Wall>().AcceptShape(shape)) == false)
+        {
+            System.Random random = new System.Random((int)DateTime.UtcNow.Ticks);
+            Debug.Log("Need to fix walls.");
+            GameObject oneOfWalls = generatedWalls[random.Next(0, generatedWalls.Count)];
+            GameObject segment = GameObject.Instantiate(_currentPrefabs.First(x => x.GetComponent<Wall>().AcceptShape(shape)), wall.transform);
+            segment.transform.localPosition = oneOfWalls.transform.localPosition;
+            GameObject.Destroy(oneOfWalls);
+        }
+    }
 
     private void ChangeScheme()
     {
