@@ -661,6 +661,7 @@ GameObject:
   m_Component:
   - component: {fileID: 694913855}
   - component: {fileID: 694913856}
+  - component: {fileID: 694913857}
   m_Layer: 0
   m_Name: Powers
   m_TagString: Untagged
@@ -692,9 +693,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3490b73353c541446beaed070ff46ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CooldownSeconds: 0.3
-  MissilePrefab: {fileID: 114324438872242900, guid: fed7368b971572f4e8af9adbdbff68c1,
+  _cooldownSeconds: 2
+  _level: 2
+  _missilePrefab: {fileID: 114324438872242900, guid: fed7368b971572f4e8af9adbdbff68c1,
     type: 2}
+  _sleepTime: 0.4
+  _speed: 10
+--- !u!114 &694913857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 694913854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5767cf1f702d66c41b7d346d4b624409, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cooldownSeconds: 1
+  _level: 2
+  _radiusPerLevel: 3
+  _moveForce: 4
 --- !u!1001 &724348283
 Prefab:
   m_ObjectHideFlags: 0

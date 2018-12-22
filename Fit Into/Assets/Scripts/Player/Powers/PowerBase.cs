@@ -5,12 +5,16 @@ using UnityEngine;
 
 public abstract class PowerBase : MonoBehaviour {
 
-    public double CooldownSeconds;
+    [SerializeField]
+    protected double _cooldownSeconds;
+    [SerializeField]
+    protected int _level;
+
     public TimeSpan Cooldown
     {
         get
         {
-            return TimeSpan.FromSeconds(CooldownSeconds);
+            return TimeSpan.FromSeconds(_cooldownSeconds);
         }
     }
     public TimeSpan ToUse

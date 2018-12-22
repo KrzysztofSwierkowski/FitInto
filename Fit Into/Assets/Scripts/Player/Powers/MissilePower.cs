@@ -7,12 +7,18 @@ using UnityEngine;
 
 public class MissilePower : PowerBase
 {
-    public Missile MissilePrefab;
-    public int Level;
+    [SerializeField]
+    private Missile _missilePrefab;
+
+    [SerializeField]
+    private float _sleepTime;
+
+    [SerializeField]
+    private float _speed;
 
     public void Awake()
     {
-        if (MissilePrefab == null)
+        if (_missilePrefab == null)
         {
             Debug.LogError("MissilePrefab is not set");
         }
@@ -35,12 +41,12 @@ public class MissilePower : PowerBase
     private IEnumerator Fire()
     {
         MoveController moveController = GameObject.FindObjectOfType<MoveController>();
-        for (int i = 0; i <= Level; ++i)
+        for (int i = 0; i <= _level; ++i)
         {
-            Rigidbody missile = GameObject.Instantiate(MissilePrefab).GetComponent<Rigidbody>();
+            Rigidbody missile = GameObject.Instantiate(_missilePrefab).GetComponent<Rigidbody>();
             missile.transform.position = moveController.transform.position;
-            missile.velocity = new Vector3(0, 0, 10);
-            yield return new WaitForSeconds(.4f);
+            missile.velocity = new Vector3(0, 0, _speed);
+            yield return new WaitForSeconds(_sleepTime);
         }
     }
 }
