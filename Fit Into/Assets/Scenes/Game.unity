@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.34417, g: 0.013580496, b: 0.3124855, a: 1}
+  m_IndirectSpecularColor: {r: 0.09107878, g: 0.015175286, b: 0.3551599, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -222,14 +222,14 @@ MonoBehaviour:
   Schemes:
   - WallPrefabs:
     - {fileID: 1791008848118560, guid: 379d609fa59690b4395700bd7e1fe619, type: 2}
-    - {fileID: 1648513801824482, guid: e5836903e203d064aa8801db36cf79f0, type: 2}
-    - {fileID: 1883967611959954, guid: 245f1f5138ee30847ac8c0a3c3a23683, type: 2}
-    - {fileID: 1008167477315164, guid: 75a91af8d73681541be2f5e25304323e, type: 2}
+    - {fileID: 1095892126647390, guid: 99159e1e0c9223d459439425def94929, type: 2}
+    - {fileID: 1528761853744450, guid: 824e3f6d841398646ab290199b5fef01, type: 2}
+    - {fileID: 1995728405518504, guid: bc85c0aaf6a19b64fbda8e50f1a5c5db, type: 2}
     WallsToChange: 15
   - WallPrefabs:
-    - {fileID: 1648513801824482, guid: e5836903e203d064aa8801db36cf79f0, type: 2}
-    - {fileID: 1883967611959954, guid: 245f1f5138ee30847ac8c0a3c3a23683, type: 2}
-    - {fileID: 1008167477315164, guid: 75a91af8d73681541be2f5e25304323e, type: 2}
+    - {fileID: 1095892126647390, guid: 99159e1e0c9223d459439425def94929, type: 2}
+    - {fileID: 1528761853744450, guid: 824e3f6d841398646ab290199b5fef01, type: 2}
+    - {fileID: 1995728405518504, guid: bc85c0aaf6a19b64fbda8e50f1a5c5db, type: 2}
     - {fileID: 1791008848118560, guid: 379d609fa59690b4395700bd7e1fe619, type: 2}
     WallsToChange: 20
 --- !u!1 &231674665
