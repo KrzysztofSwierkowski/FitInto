@@ -848,7 +848,7 @@ MonoBehaviour:
   _missilePrefab: {fileID: 114324438872242900, guid: fed7368b971572f4e8af9adbdbff68c1,
     type: 3}
   _sleepTime: 0.4
-  _speed: 10
+  _speed: 50
 --- !u!114 &694913857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -939,7 +939,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &827391287
 Transform:
   m_ObjectHideFlags: 0
@@ -1028,7 +1028,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1023666780
 Transform:
   m_ObjectHideFlags: 0
