@@ -58,6 +58,7 @@ public class CollisionController : MonoBehaviour
         BonusPoint bonus = other.GetComponent<BonusPoint>();
         if (bonus != null)
         {
+            Debug.Log("Collecting bonus " + bonus.Points);
             GetComponent<PointsController>().AddPoints(bonus.Points);
             GameObject.Destroy(bonus.gameObject);
             return true;

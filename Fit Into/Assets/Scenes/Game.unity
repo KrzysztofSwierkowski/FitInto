@@ -864,7 +864,7 @@ MonoBehaviour:
   _cooldownSeconds: 1
   _level: 2
   _radiusPerLevel: 3
-  _moveForce: 4
+  _timeToPlayer: 0.5
 --- !u!114 &694913858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1454,7 +1454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ee0677137bf27e4da9a0aead7002872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _basicSpeed: 2.5
+  _basicSpeed: 3
   _basicJumpIntervalSec: 1
   SpeedMultiplers:
   - StartTime: 0

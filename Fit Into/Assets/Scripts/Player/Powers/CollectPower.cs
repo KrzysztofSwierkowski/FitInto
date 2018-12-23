@@ -8,10 +8,9 @@ public class CollectPower : PowerBase
 {
     [SerializeField]
     private double _radiusPerLevel;
-
     [SerializeField]
-    private float _moveForce;
-
+    private float _timeToPlayer = 0.5f;
+    
     public void Update()
     {
         if (Input.GetKey(KeyCode.L))
@@ -22,15 +21,12 @@ public class CollectPower : PowerBase
     
     protected override void UseIntern()
     {
-        List<BonusPoint> toPull = GetPointsInRadius();
         MoveController moveController = GameObject.FindObjectOfType<MoveController>();
-        foreach (var bonus in toPull)
+        foreach(var point in GetPointsInRadius())
         {
-            Vector3 diff = (moveController.transform.position - bonus.transform.position);
-            Rigidbody rigit = bonus.GetComponent<Rigidbody>();
-            rigit.velocity = diff * _moveForce;
+            MoveToTarget moveToTarget = point.gameObject.AddComponent<MoveToTarget>();
+            moveToTarget.Init(moveController.transform, _timeToPlayer);
         }
-
     }
 
     List<BonusPoint> GetPointsInRadius()
