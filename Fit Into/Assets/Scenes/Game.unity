@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.09107878, g: 0.015175286, b: 0.3551599, a: 1}
+  m_IndirectSpecularColor: {r: 0.38473988, g: 0, b: 0.31429544, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1003,8 +1003,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BonusPerDistance: 15
   BonusPointPrefabs:
-  - {fileID: 1287669578938200, guid: 7c25ea226c40adb49b0140a4466b2893, type: 2}
-  - {fileID: 1777092120625750, guid: 40195d370356dc44d9cbc2b6bc89c421, type: 2}
+  - {fileID: 1219709830880196, guid: c1ad72f827a120444bee5a6c4ab5e596, type: 2}
+  - {fileID: 1689026821019172, guid: 0be538fe45b35d041a0fe9130f49af6c, type: 2}
   GapToWall: 4
 --- !u!1 &1361510404
 GameObject:
