@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class MoveController : MonoBehaviour {
+public class MoveController : MonoBehaviour
+{
 
     [Serializable]
     public class MultiplerOverTime
@@ -15,10 +16,20 @@ public class MoveController : MonoBehaviour {
         public float Multipler;
     }
 
-    public float BasicSpeed = 10f;
-    public float BasicJumpIntervalSec = 1f;
+    private List<IMoveModifier> _customModifiers = new List<IMoveModifier>();
+
+    [SerializeField]
+    private float _basicSpeed = 10f;
+    [SerializeField]
+    private float _basicJumpIntervalSec = 1f;
+
     public MultiplerOverTime[] SpeedMultiplers;
     public MultiplerOverTime[] JumpMultiplers;
+
+    public void AddNewModifier(IMoveModifier moveModifier)
+    {
+        _customModifiers.Add(moveModifier);
+    }
 
     private void Start()
     {
@@ -26,7 +37,7 @@ public class MoveController : MonoBehaviour {
         _currentRail = Rails.First(x => x.WorldPositionX == 0 && x.WorldPositionY == 0);
     }
 
-    void FixedUpdate ()
+    void FixedUpdate()
     {
         if (GetComponent<CollisionController>().IsGameOver)
         {
@@ -34,20 +45,37 @@ public class MoveController : MonoBehaviour {
         }
         transform.position = GetNewPosition();
     }
-    
+
     private Vector3 GetNewPosition()
     {
         _timeFromLastJump += Time.fixedDeltaTime;
         Vector2 jump = MakeJump();
-        Vector3 dest = transform.position + new Vector3(0,0, BasicSpeed * SelectMultipler(SpeedMultiplers) * Time.fixedDeltaTime);
+        Vector3 dest = transform.position + new Vector3(0, 0, ModifySpeed(_basicSpeed * SelectMultipler(SpeedMultiplers)) * Time.fixedDeltaTime);
         dest.x = jump.x;
         dest.y = jump.y;
         return dest;
     }
 
+    private float ModifySpeed(float speed)
+    {
+        float result = speed;
+        foreach (IMoveModifier moveModifier in _customModifiers.ToArray())
+        {
+            if (moveModifier.EndTime > DateTime.UtcNow)
+            {
+                result = moveModifier.Modify(result);
+            }
+            else
+            {
+                _customModifiers.Remove(moveModifier);
+            }
+        }
+        return result;
+    }
+
     private Vector2 MakeJump()
     {
-        if (_timeFromLastJump >= BasicJumpIntervalSec * SelectMultipler(JumpMultiplers))
+        if (_timeFromLastJump >= _basicJumpIntervalSec * SelectMultipler(JumpMultiplers))
         {
             float x = Input.GetAxis("Horizontal");
             float y = Input.GetAxis("Vertical");

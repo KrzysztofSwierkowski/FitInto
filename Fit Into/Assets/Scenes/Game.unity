@@ -809,6 +809,7 @@ GameObject:
   - component: {fileID: 694913855}
   - component: {fileID: 694913856}
   - component: {fileID: 694913857}
+  - component: {fileID: 694913858}
   m_Layer: 0
   m_Name: Powers
   m_TagString: Untagged
@@ -864,6 +865,22 @@ MonoBehaviour:
   _level: 2
   _radiusPerLevel: 3
   _moveForce: 4
+--- !u!114 &694913858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694913854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebc77ee15bbde8841b7a5e1b33cb3ca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cooldownSeconds: 2
+  _level: 2
+  _slowerPerLevel: 0.3
+  _effectTimeSec: 1
 --- !u!1001 &724348283
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1437,8 +1454,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ee0677137bf27e4da9a0aead7002872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BasicSpeed: 4
-  BasicJumpIntervalSec: 1
+  _basicSpeed: 2.5
+  _basicJumpIntervalSec: 1
   SpeedMultiplers:
   - StartTime: 0
     Multipler: 1
