@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PointsPrinter : MonoBehaviour
+public class PointsUI : MonoBehaviour
 {
     private PointsController _pointsController;
 	

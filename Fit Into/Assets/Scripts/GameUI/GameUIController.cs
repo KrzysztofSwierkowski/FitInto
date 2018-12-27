@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ButtonsController : MonoBehaviour
+public class GameUIController : MonoBehaviour
 {
-    public GameObject ToMenuButton;
+    public GameObject GameOverMenu;
+    public GameObject HUB;
 
     private CollisionController _collisionController;
 
@@ -17,11 +19,7 @@ public class ButtonsController : MonoBehaviour
         {
             _collisionController = GameObject.FindObjectOfType<CollisionController>();
         }
-        ToMenuButton.SetActive(_collisionController.IsGameOver);
-    }
-
-    public void ToMenu()
-    {
-        SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+        GameOverMenu.SetActive(_collisionController.IsGameOver);
+        HUB.SetActive(false == _collisionController.IsGameOver);
     }
 }
