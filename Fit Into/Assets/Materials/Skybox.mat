@@ -5,7 +5,8 @@ Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Skybox
   m_Shader: {fileID: 4800000, guid: 9947c4a93bb6b834abb5bccf693223fc, type: 3}
   m_ShaderKeywords: _GLOSSYREFLECTIONS_OFF _SPECULARHIGHLIGHTS_OFF
@@ -66,8 +67,8 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _SkyExponent1: 0.53
-    - _SkyExponent2: 0.19
+    - _SkyExponent1: 18.71
+    - _SkyExponent2: 14.74
     - _SkyIntensity: 1.28
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 0
@@ -82,8 +83,8 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0.03585945, g: 0, b: 0.0754717, a: 1}
-    - _SkyColor1: {r: 0.8584906, g: 0, b: 0.7489761, a: 0}
-    - _SkyColor2: {r: 0, g: 0, b: 0, a: 0}
-    - _SkyColor3: {r: 0.8867924, g: 0, b: 0.49104103, a: 0}
+    - _SkyColor1: {r: 0.21698111, g: 0, b: 0.21527933, a: 0}
+    - _SkyColor2: {r: 0.9285712, g: 0, b: 1, a: 0}
+    - _SkyColor3: {r: 0.26415092, g: 0, b: 0.14605996, a: 0}
     - _SunColor: {r: 1, g: 0.99, b: 0.87, a: 1}
     - _SunVector: {r: 0.269, g: 0.615, b: 0.74, a: 0}
