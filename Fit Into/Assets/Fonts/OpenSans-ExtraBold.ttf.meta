@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 613625bfa1a7ce441aa61c429e6a2638
+guid: 5ea3d92e55b17da44ae32962b017efdf
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,9 +8,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Source Code Pro Black
+  fontName: Open Sans
   fontNames:
-  - Source Code Pro Black
+  - Open Sans
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
