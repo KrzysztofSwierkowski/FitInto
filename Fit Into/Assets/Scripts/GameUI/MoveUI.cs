@@ -11,5 +11,6 @@ public class MoveUI : MonoBehaviour
     public void OnMove(int iMoveDirection)
     {
         MoveDirection moveDirection = (MoveDirection)iMoveDirection;
+        GameEngine.Instance.MoveController.Move(moveDirection);
     }
 }

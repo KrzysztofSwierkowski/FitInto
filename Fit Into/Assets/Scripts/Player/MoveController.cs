@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MoveController : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class MoveController : MonoBehaviour
     }
 
     private List<IMoveModifier> _customModifiers = new List<IMoveModifier>();
+    private MoveDirection _lastJump = MoveDirection.None;
 
     [SerializeField]
     private float _basicSpeed = 10f;
@@ -37,6 +39,15 @@ public class MoveController : MonoBehaviour
         _timeFromLastJump = 0f;
         _startTime = DateTime.UtcNow;
         _currentRail = Rails.First(x => x.WorldPositionX == 0 && x.WorldPositionY == 0);
+    }
+
+    public void Move(MoveDirection moveDirection)
+    {
+        if (_lastJump == MoveDirection.None && _timeFromLastJump >= _basicJumpIntervalSec * SelectMultipler(JumpMultiplers))
+        {
+            Debug.Log("Jump to " + moveDirection);
+            _lastJump = moveDirection;
+        }
     }
 
     private void Start()
@@ -82,51 +93,36 @@ public class MoveController : MonoBehaviour
 
     private Vector2 MakeJump()
     {
-        if (_timeFromLastJump >= _basicJumpIntervalSec * SelectMultipler(JumpMultiplers))
+        if (_lastJump != MoveDirection.None)
         {
-            float x = Input.GetAxis("Horizontal");
-            float y = Input.GetAxis("Vertical");
-            if (x != 0 || y != 0)
+            switch (_lastJump)
             {
-                if (Math.Abs(x) >= Math.Abs(y))
-                {
-                    TryJumpHorizontal(x);
-                }
-                else
-                {
-                    TryJumpVertical(y);
-                }
+                case MoveDirection.Left:
+                    {
+                        TryJumpLeft();
+                        break;
+                    }
+                case MoveDirection.Up:
+                    {
+                        TryJumpUp();
+                        break;
+                    }
+                case MoveDirection.Right:
+                    {
+                        TryJumpRight();
+                        break;
+                    }
+                case MoveDirection.Down:
+                    {
+                        TryJumpDown();
+                        break;
+                    }
+                default:
+                    break;
             }
+            _lastJump = MoveDirection.None;
         }
         return new Vector2(_currentRail.WorldPositionX, _currentRail.WorldPositionY);
-    }
-
-    private void TryJumpHorizontal(float x)
-    {
-        if (x < 0)
-        {
-            // Left
-            TryJumpLeft();
-        }
-        else
-        {
-            // Right
-            TryJumpRight();
-        }
-    }
-
-    private void TryJumpVertical(float y)
-    {
-        if (y < 0)
-        {
-            // down
-            TryJumpDown();
-        }
-        else
-        {
-            // up
-            TryJumpUp();
-        }
     }
 
     private void TryJumpUp()

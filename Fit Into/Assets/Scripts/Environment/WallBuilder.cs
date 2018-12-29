@@ -14,7 +14,9 @@ public class WallBuilder : MonoBehaviour
         [SerializeField]
         public int WallsToChange;
     }
-    public WallChangeScheme[] Schemes;
+
+    [SerializeField]
+    private WallChangeScheme[] Schemes;
     
     public void DecrementWallCounter()
     {
