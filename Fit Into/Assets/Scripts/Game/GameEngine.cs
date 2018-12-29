@@ -67,6 +67,8 @@ public class GameEngine : MonoBehaviour
             case GameStatus.GameOver:
                 {
                     Stats.AddResult(PointsController.Points);
+                    GameObject.FindObjectOfType<WallBuilder>().ResetState();
+                    GameObject.FindObjectOfType<BonusBuilder>().ResetState();
                     break;
                 }
             default:
