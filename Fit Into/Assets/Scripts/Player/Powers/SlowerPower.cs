@@ -17,6 +17,7 @@ public class SlowerPower : PowerBase
         {
             base.Use();
         }
+        base.UpdateFrame();
     }
 
     protected override void UseIntern()

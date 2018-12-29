@@ -17,6 +17,7 @@ public class CollectPower : PowerBase
         {
             base.Use();
         }
+        base.UpdateFrame();
     }
     
     protected override void UseIntern()

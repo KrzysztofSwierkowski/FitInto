@@ -10,36 +10,32 @@ public abstract class PowerBase : MonoBehaviour {
     [SerializeField]
     protected int _level;
 
-    public TimeSpan Cooldown
+    public TimeSpan Cooldown { get; protected set; }
+
+    protected void UpdateFrame()
     {
-        get
+        if (Cooldown <= TimeSpan.Zero)
         {
-            return TimeSpan.FromSeconds(_cooldownSeconds);
+            Cooldown = TimeSpan.Zero;
+            return;
         }
+        Cooldown -= TimeSpan.FromSeconds(Time.deltaTime);
     }
-    public TimeSpan ToUse
-    {
-        get
-        {
-            TimeSpan fromUse = DateTime.UtcNow - _lastUsed;
-            if (fromUse >= Cooldown)
-            {
-                return TimeSpan.Zero;
-            }
-            return Cooldown - fromUse;
-        }
-    }
-    private DateTime _lastUsed = DateTime.UtcNow;
 
 
     public void Use()
     {
-        if (ToUse != TimeSpan.Zero)
+        if (Cooldown > TimeSpan.Zero)
         {
             return;
         }
+        SetCooldown();
         UseIntern();
-        _lastUsed = DateTime.UtcNow;
+    }
+
+    protected virtual void SetCooldown()
+    {
+        Cooldown = TimeSpan.FromSeconds(_cooldownSeconds);
     }
 
     protected abstract void UseIntern();

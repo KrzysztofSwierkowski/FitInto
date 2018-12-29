@@ -11,10 +11,10 @@ public class MissilePower : PowerBase
     private Missile _missilePrefab;
 
     [SerializeField]
-    private float _sleepTime;
+    private float _speed;
 
     [SerializeField]
-    private float _speed;
+    private float _cooldownReducePerLevel;
 
     public void Awake()
     {
@@ -30,23 +30,20 @@ public class MissilePower : PowerBase
         {
             base.Use();
         }
+        base.UpdateFrame();
     }
 
     protected override void UseIntern()
     {
-        StartCoroutine(Fire());
-        
+        MoveController moveController = GameObject.FindObjectOfType<MoveController>();
+        Rigidbody missile = GameObject.Instantiate(_missilePrefab).GetComponent<Rigidbody>();
+        missile.transform.position = moveController.transform.position;
+        missile.velocity = new Vector3(0, 0, _speed);
     }
 
-    private IEnumerator Fire()
+    protected override void SetCooldown()
     {
-        MoveController moveController = GameObject.FindObjectOfType<MoveController>();
-        for (int i = 0; i <= _level; ++i)
-        {
-            Rigidbody missile = GameObject.Instantiate(_missilePrefab).GetComponent<Rigidbody>();
-            missile.transform.position = moveController.transform.position;
-            missile.velocity = new Vector3(0, 0, _speed);
-            yield return new WaitForSeconds(_sleepTime);
-        }
+        Cooldown = TimeSpan.FromSeconds(_cooldownSeconds - _cooldownSeconds * _cooldownReducePerLevel * _level);
+        Debug.Log(Cooldown);
     }
 }

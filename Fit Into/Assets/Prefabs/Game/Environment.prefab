@@ -526,7 +526,7 @@ MonoBehaviour:
     IndexX: 2
     IndexY: 2
   DistanceBetweenWalls: 15
-  DistancesVisible: 3
+  DistancesVisible: 1
 --- !u!1 &2040377832250712226
 GameObject:
   m_ObjectHideFlags: 0
