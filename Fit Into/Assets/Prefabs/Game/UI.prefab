@@ -647,6 +647,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 763600c396ce60846b0a4dc488d310e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _textCurrentScore: {fileID: 6641362596104255063}
+  _textBestScore: {fileID: 6641362595013265903}
 --- !u!1 &4685743551566054965
 GameObject:
   m_ObjectHideFlags: 0
@@ -1312,7 +1314,6 @@ GameObject:
   - component: {fileID: 6641362595143022694}
   - component: {fileID: 6641362595143022691}
   - component: {fileID: 6641362595143022688}
-  - component: {fileID: 6641362595143022689}
   m_Layer: 5
   m_Name: BestScore
   m_TagString: Untagged
@@ -1379,18 +1380,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &6641362595143022689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6641362595143022695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 763600c396ce60846b0a4dc488d310e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6641362595312860874
 GameObject:
   m_ObjectHideFlags: 0
@@ -1826,7 +1815,6 @@ GameObject:
   - component: {fileID: 6641362595708531145}
   - component: {fileID: 6641362595708531146}
   - component: {fileID: 6641362595708531147}
-  - component: {fileID: 6641362595708531144}
   m_Layer: 5
   m_Name: CurrentScore
   m_TagString: Untagged
@@ -1893,18 +1881,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &6641362595708531144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6641362595708531150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 763600c396ce60846b0a4dc488d310e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6641362596088617718
 GameObject:
   m_ObjectHideFlags: 0

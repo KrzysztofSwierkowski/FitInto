@@ -31,15 +31,22 @@ public class MoveController : MonoBehaviour
         _customModifiers.Add(moveModifier);
     }
 
-    private void Start()
+    public void ResetState()
     {
+        transform.position = Vector3.zero;
+        _timeFromLastJump = 0f;
         _startTime = DateTime.UtcNow;
         _currentRail = Rails.First(x => x.WorldPositionX == 0 && x.WorldPositionY == 0);
     }
 
-    void FixedUpdate()
+    private void Start()
     {
-        if (GetComponent<CollisionController>().IsGameOver)
+        ResetState();
+    }
+
+    private void FixedUpdate()
+    {
+        if (GameEngine.Instance.Status == GameStatus.GameOver)
         {
             return;
         }

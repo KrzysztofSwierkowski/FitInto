@@ -6,33 +6,40 @@ using UnityEngine;
 
 public class PointsController : MonoBehaviour
 {
+
     public int Points { get; private set; }
     public int ThresholdSec = 30;
     public int[] PointsPerSecond;
 
     private float _pointsDelta;
     private DateTime _startTime;
+    
+    private void Start()
+    {
+        ResetState();
+    }
 
+    public void ResetState()
+    {
+        _startTime = DateTime.UtcNow;
+        Points = 0;
+    }
+    
     public void AddPoints(int points)
     {
         Points += points;
     }
 
-    private void Start()
-    {
-        _startTime = DateTime.UtcNow;
-    }
-
     private void Update ()
     {
-        if (GetComponent<CollisionController>().IsGameOver)
+        if (GameEngine.Instance.Status == GameStatus.GameOver)
         {
             return;
         }
         _pointsDelta += Time.deltaTime * GetMultipler();
         if (_pointsDelta > 1)
         {
-            Points += (int)_pointsDelta;
+            AddPoints((int)_pointsDelta);
             _pointsDelta -= (int)_pointsDelta;
         }
     }

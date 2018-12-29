@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class CollisionController : MonoBehaviour
 {
-    public bool IsGameOver;
-    
+
     private void OnTriggerEnter(Collider other)
     {
         if (ProceedBonusPointEnter(other))
@@ -34,7 +33,7 @@ public class CollisionController : MonoBehaviour
             Shape playerShape = GetComponent<ShapeController>().CurrentShape;
             if( wall.AcceptableShapes.Any(x => x == playerShape) == false)
             {
-                GameOver();
+                GameEngine.Instance.SetGameStatus(GameStatus.GameOver);
             }
             return true;
         }
@@ -59,16 +58,10 @@ public class CollisionController : MonoBehaviour
         if (bonus != null)
         {
             Debug.Log("Collecting bonus " + bonus.Points);
-            GetComponent<PointsController>().AddPoints(bonus.Points);
+            GameEngine.Instance.PointsController.AddPoints(bonus.Points);
             GameObject.Destroy(bonus.gameObject);
             return true;
         }
         return false;
-    }
-
-    private void GameOver()
-    {
-        IsGameOver = true;
-        GameObject.FindObjectOfType<PlayerStatisticsPoints>().AddResult(GetComponent<PointsController>().Points);
     }
 }

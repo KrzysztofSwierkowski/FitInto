@@ -14,7 +14,6 @@ public class PointsUI : MonoBehaviour
         {
             _pointsController = GameObject.FindObjectOfType<PointsController>();
         }
-        GetComponent<Text>().text = "Points: " + _pointsController.Points;
-		
+        GetComponent<Text>().text = GameEngine.Instance.PointsController.Points.ToString();
 	}
 }

@@ -451,6 +451,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2040377831956303296}
   - component: {fileID: 2040377831956303299}
+  - component: {fileID: 8923222122556465416}
   m_Layer: 0
   m_Name: Environment
   m_TagString: Untagged
@@ -527,6 +528,18 @@ MonoBehaviour:
     IndexY: 2
   DistanceBetweenWalls: 15
   DistancesVisible: 1
+--- !u!114 &8923222122556465416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040377831956303297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16c8a25d81b06264aa0022a5176e0695, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2040377832250712226
 GameObject:
   m_ObjectHideFlags: 0

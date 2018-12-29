@@ -48,12 +48,16 @@ public class ShapeController : MonoBehaviour
         }
     }
 
-	// Use this for initialization
-	void Start ()
+    public void ResetState()
     {
         _schemeNumber = 0;
         ChooseNextShape(_schemeNumber);
         ChangeShape();
+    }
+    
+    void Start ()
+    {
+        ResetState();
     }
 
 

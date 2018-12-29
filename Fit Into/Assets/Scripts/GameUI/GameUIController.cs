@@ -9,17 +9,26 @@ public class GameUIController : MonoBehaviour
 {
     public GameObject GameOverMenu;
     public GameObject HUB;
+    
 
-    private CollisionController _collisionController;
-
-
-    public void Update()
+    public void SetStatus(GameStatus gameStatus)
     {
-        if (_collisionController == null)
+        switch (gameStatus)
         {
-            _collisionController = GameObject.FindObjectOfType<CollisionController>();
+            case GameStatus.Running:
+                {
+                    GameOverMenu.SetActive(false);
+                    HUB.SetActive(true);
+                    break;
+                }
+            case GameStatus.GameOver:
+                {
+                    GameOverMenu.SetActive(true);
+                    HUB.SetActive(false);
+                    break;
+                }
+            default:
+                break;
         }
-        GameOverMenu.SetActive(_collisionController.IsGameOver);
-        HUB.SetActive(false == _collisionController.IsGameOver);
     }
 }

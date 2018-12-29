@@ -10,15 +10,28 @@ public class BonusBuilder : MonoBehaviour
     public GameObject[] BonusPointPrefabs;
     public int GapToWall = 3;
 
+    public void ResetState()
+    {
+        foreach (var point in _generatedPoints.ToArray())
+        {
+            _generatedPoints.Remove(point);
+            GameObject.Destroy(point.gameObject);
+        }
+    }
+
     private void Update()
     {
+        if (GameEngine.Instance.Status == GameStatus.GameOver)
+        {
+            return;
+        }
         GenerateBonuses();
         DestroyBonuses();
     }
 
     private void GenerateBonuses()
     {
-        int visibleDistance = CalculateDistance((int)MoveController.transform.position.z) + EnvSettings.DistancesVisible;
+        int visibleDistance = CalculateDistance((int)GameEngine.Instance.MoveController.transform.position.z) + GameEngine.Instance.EnvSettings.DistancesVisible;
         int distanceNumber = 0;
         if (_generatedPoints.Any())
         {
@@ -35,7 +48,7 @@ public class BonusBuilder : MonoBehaviour
 
     private void DestroyBonuses()
     {
-        int playerDistance = CalculateDistance((int)MoveController.transform.position.z);
+        int playerDistance = CalculateDistance((int)GameEngine.Instance.MoveController.transform.position.z);
         foreach(var pointBehind in _generatedPoints.Where(x => CalculateDistance((int)x.transform.position.z) < playerDistance).ToArray())
         {
             _generatedPoints.Remove(pointBehind);
@@ -47,45 +60,20 @@ public class BonusBuilder : MonoBehaviour
     {
         System.Random random = new System.Random((int)DateTime.UtcNow.Ticks);
         GameObject pointsParent = new GameObject(string.Format("BonusPoint '{0}'", distanceNumber));
-        pointsParent.transform.position = new Vector3(0, 0, distanceNumber * EnvSettings.DistanceBetweenWalls);
+        pointsParent.transform.position = new Vector3(0, 0, distanceNumber * GameEngine.Instance.EnvSettings.DistanceBetweenWalls);
         for (int i = 0; i< BonusPerDistance;++i)
         {
             GameObject bonusPoint = GameObject.Instantiate(BonusPointPrefabs[random.Next(0, BonusPointPrefabs.Length)]);
             bonusPoint.transform.parent = pointsParent.transform;
-            Rail randomRail = EnvSettings.RailsDefinitions[random.Next(0, EnvSettings.RailsDefinitions.Length)];
-            bonusPoint.transform.localPosition = new Vector3(randomRail.WorldPositionX, randomRail.WorldPositionY, random.Next(GapToWall, EnvSettings.DistanceBetweenWalls - GapToWall));
+            Rail randomRail = GameEngine.Instance.EnvSettings.RailsDefinitions[random.Next(0, GameEngine.Instance.EnvSettings.RailsDefinitions.Length)];
+            bonusPoint.transform.localPosition = new Vector3(randomRail.WorldPositionX, randomRail.WorldPositionY, random.Next(GapToWall, GameEngine.Instance.EnvSettings.DistanceBetweenWalls - GapToWall));
         }
         _generatedPoints.Add(pointsParent);
     }
 
     private int CalculateDistance(int zPosition)
     {
-        return zPosition / EnvSettings.DistanceBetweenWalls;
-    }
-    
-    private MoveController _moveController;
-    private MoveController MoveController
-    {
-        get
-        {
-            if (null == _moveController)
-            {
-                _moveController = GameObject.FindObjectOfType<MoveController>();
-            }
-            return _moveController;
-        }
-    }
-    private EnvironmentSettings _envSettings;
-    private EnvironmentSettings EnvSettings
-    {
-        get
-        {
-            if (null == _envSettings)
-            {
-                _envSettings = GameObject.FindObjectOfType<EnvironmentSettings>();
-            }
-            return _envSettings;
-        }
+        return zPosition / GameEngine.Instance.EnvSettings.DistanceBetweenWalls;
     }
 
     private List<GameObject> _generatedPoints = new List<GameObject>();

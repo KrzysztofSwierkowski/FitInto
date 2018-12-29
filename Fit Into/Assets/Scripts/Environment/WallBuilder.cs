@@ -26,26 +26,41 @@ public class WallBuilder : MonoBehaviour
         }
     }
 
-    private void Start()
+    public void ResetState()
     {
+
+        foreach (var wall in _generatedWalls.ToArray())
+        {
+            _generatedWalls.Remove(wall);
+            GameObject.Destroy(wall.gameObject);
+        }
         _schemeNumber = 0;
         ChangeScheme();
     }
 
+    private void Start()
+    {
+        ResetState();
+    }
+
     private void Update ()
     {
+        if (GameEngine.Instance.Status == GameStatus.GameOver)
+        {
+            return;
+        }
         GenerateWalls();
         DestroyWalls();
 	}
 
     private void GenerateWalls()
     {
-        int positionToGenerate = EnvSettings.DistanceBetweenWalls;
+        int positionToGenerate = GameEngine.Instance.EnvSettings.DistanceBetweenWalls;
         if (_generatedWalls.Any())
         {
             GameObject lastWall = _generatedWalls.Last.Value;
-            int nextPosibleZ = (int)lastWall.transform.position.z + EnvSettings.DistanceBetweenWalls;
-            int visibleDistance = (int)MoveController.transform.position.z + EnvSettings.DistanceBetweenWalls * EnvSettings.DistancesVisible;
+            int nextPosibleZ = (int)lastWall.transform.position.z + GameEngine.Instance.EnvSettings.DistanceBetweenWalls;
+            int visibleDistance = (int)GameEngine.Instance.MoveController.transform.position.z + GameEngine.Instance.EnvSettings.DistanceBetweenWalls * GameEngine.Instance.EnvSettings.DistancesVisible;
             if (nextPosibleZ > visibleDistance)
             {
                 return;
@@ -63,7 +78,7 @@ public class WallBuilder : MonoBehaviour
             return;
         }
         GameObject wall = _generatedWalls.First.Value;
-        if (wall.transform.position.z + EnvSettings.DistanceBetweenWalls < MoveController.transform.position.z)
+        if (wall.transform.position.z + GameEngine.Instance.EnvSettings.DistanceBetweenWalls < GameEngine.Instance.MoveController.transform.position.z)
         {
             GameObject.Destroy(wall);
             _generatedWalls.RemoveFirst();
@@ -76,7 +91,7 @@ public class WallBuilder : MonoBehaviour
         wall.transform.position = new Vector3(0, 0, positionToGenerate);
         System.Random random = new System.Random((int)DateTime.UtcNow.Ticks);
         List<GameObject> generatedWalls = new List<GameObject>();
-        foreach(Rail rail in EnvSettings.RailsDefinitions)
+        foreach(Rail rail in GameEngine.Instance.EnvSettings.RailsDefinitions)
         {
             GameObject segment = GameObject.Instantiate(_currentPrefabs[random.Next(0, _currentPrefabs.Length)], wall.transform);
             segment.transform.localPosition = new Vector3(rail.WorldPositionX, rail.WorldPositionY, 0);
@@ -88,15 +103,15 @@ public class WallBuilder : MonoBehaviour
 
     private void FixWall(GameObject wall, List<GameObject> generatedWalls, int positionToGenerate)
     {
-        int generatedInFront = (int)((positionToGenerate - MoveController.transform.position.z) / EnvSettings.DistanceBetweenWalls);
+        int generatedInFront = (int)((positionToGenerate - GameEngine.Instance.MoveController.transform.position.z) / GameEngine.Instance.EnvSettings.DistanceBetweenWalls);
         Shape shape = Shape.Cone;
-        if (ShapeController.WallsToNextShape < generatedInFront)
+        if (GameEngine.Instance.ShapeController.WallsToNextShape < generatedInFront)
         {
-            shape = ShapeController.NextShape;
+            shape = GameEngine.Instance.ShapeController.NextShape;
         }
         else
         {
-            shape = ShapeController.CurrentShape;
+            shape = GameEngine.Instance.ShapeController.CurrentShape;
         }
         if (generatedWalls.Any(x => x.GetComponent<Wall>().AcceptShape(shape)) == false)
         {
@@ -128,42 +143,6 @@ public class WallBuilder : MonoBehaviour
     private int _schemeNumber;
     private int _wallsToChangeScheme;
     private GameObject[] _currentPrefabs;
-    private MoveController _moveController;
-    private MoveController MoveController
-    {
-        get
-        {
-            if (null == _moveController)
-            {
-                _moveController = GameObject.FindObjectOfType<MoveController>();
-            }
-            return _moveController;
-        }
-    }
-    private ShapeController _shapeController;
-    private ShapeController ShapeController
-    {
-        get
-        {
-            if (null == _shapeController)
-            {
-                _shapeController = GameObject.FindObjectOfType<ShapeController>();
-            }
-            return _shapeController;
-        }
-    }
-    private EnvironmentSettings _envSettings;
-    private EnvironmentSettings EnvSettings
-    {
-        get
-        {
-            if (null == _envSettings)
-            {
-                _envSettings = GameObject.FindObjectOfType<EnvironmentSettings>();
-            }
-            return _envSettings;
-        }
-    }
 
     private LinkedList<GameObject> _generatedWalls = new LinkedList<GameObject>();
 }
