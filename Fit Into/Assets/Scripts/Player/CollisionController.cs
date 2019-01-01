@@ -45,6 +45,7 @@ public class CollisionController : MonoBehaviour
         Wall wall = other.GetComponent<Wall>();
         if (wall != null)
         {
+            FindObjectOfType<AudioManager>().Play("WallEntry");
             GetComponent<ShapeController>().DecrementWallCounter();
             GameObject.FindObjectOfType<WallBuilder>().DecrementWallCounter();
             return true;
