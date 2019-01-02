@@ -27,6 +27,11 @@ public class AudioManager : MonoBehaviour
         sound.source = audioSource;
     }
 
+    public void Start()
+    {
+        ResetMusic();
+    }
+
     public void ResetMusic()
     {
         _theme.source.Stop();

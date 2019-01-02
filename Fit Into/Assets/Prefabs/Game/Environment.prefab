@@ -527,7 +527,7 @@ MonoBehaviour:
     WorldPositionY: -2
     IndexX: 2
     IndexY: 2
-  DistanceBetweenWalls: 15
+  DistanceBetweenWalls: 20
   DistancesVisible: 1
 --- !u!114 &8923222122556465416
 MonoBehaviour:

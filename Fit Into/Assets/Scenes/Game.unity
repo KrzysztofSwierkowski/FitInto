@@ -179,15 +179,19 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!1001 &724348283
+--- !u!1001 &793615083
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1112957224394170, guid: f013df5f85e7a9840bdbf1061a4f9a4e, type: 3}
+      propertyPath: m_Name
+      value: Data
+      objectReference: {fileID: 0}
     - target: {fileID: 4725832999544712, guid: f013df5f85e7a9840bdbf1061a4f9a4e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.000000014901161
@@ -218,7 +222,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4725832999544712, guid: f013df5f85e7a9840bdbf1061a4f9a4e, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4725832999544712, guid: f013df5f85e7a9840bdbf1061a4f9a4e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4725832999544712, guid: f013df5f85e7a9840bdbf1061a4f9a4e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4725832999544712, guid: f013df5f85e7a9840bdbf1061a4f9a4e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f013df5f85e7a9840bdbf1061a4f9a4e, type: 3}
@@ -351,7 +367,7 @@ PrefabInstance:
     - target: {fileID: 2040377831956303296, guid: 588bc4ead52205b4396044bb71b15934,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2040377831956303296, guid: 588bc4ead52205b4396044bb71b15934,
         type: 3}
@@ -367,11 +383,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2040377831956303299, guid: 588bc4ead52205b4396044bb71b15934,
-        type: 3}
-      propertyPath: DistanceBetweenWalls
-      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2040377831131408234, guid: 588bc4ead52205b4396044bb71b15934,
         type: 3}
@@ -999,6 +1010,24 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8656470613193105834, guid: afce3ca1287e14e41b52e8edbe9dfd38,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9bf6596492fb65543837a22f922e4d7f,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_FillCenter
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6641362596088617718, guid: afce3ca1287e14e41b52e8edbe9dfd38,
         type: 3}
       propertyPath: m_Name
@@ -1117,6 +1146,21 @@ PrefabInstance:
     - target: {fileID: 1250947334585999692, guid: afce3ca1287e14e41b52e8edbe9dfd38,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6641362595342362642, guid: afce3ca1287e14e41b52e8edbe9dfd38,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8881586154546580050, guid: afce3ca1287e14e41b52e8edbe9dfd38,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3311873769136278940, guid: afce3ca1287e14e41b52e8edbe9dfd38,
+        type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

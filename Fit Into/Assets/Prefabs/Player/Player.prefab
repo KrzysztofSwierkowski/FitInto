@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 239923780063479278}
   - component: {fileID: 239923780063479277}
   - component: {fileID: 1150104173210206630}
+  - component: {fileID: 34390389346715874}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -198,6 +199,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73aeb937c2131ad45bc8ff1c70177797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &34390389346715874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239923780063479279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0d0a8f1b3f609f4f8646ade46729159, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _definitions:
+  - Type: 0
+    Prefab: {fileID: 3920261488889706372, guid: 820827775a2dd004ea018d3a53a69b34,
+      type: 3}
+  - Type: 1
+    Prefab: {fileID: 9138919700418812471, guid: 64612818c9b13564ab208fdc3a0e0145,
+      type: 3}
+  - Type: 2
+    Prefab: {fileID: 8298097518049083838, guid: 68232aef18bd98f4d89c5bc8321815e3,
+      type: 3}
+  _powerSlot: {fileID: 239923780952083985}
 --- !u!1 &239923780952083985
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,9 +231,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 239923780952083984}
-  - component: {fileID: 239923780952084079}
-  - component: {fileID: 239923780952084078}
-  - component: {fileID: 239923780952084077}
   m_Layer: 0
   m_Name: Powers
   m_TagString: Untagged
@@ -231,56 +252,6 @@ Transform:
   m_Father: {fileID: 239923780063479275}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &239923780952084079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 239923780952083985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3490b73353c541446beaed070ff46ff5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cooldownSeconds: 2
-  _level: 2
-  _missilePrefab: {fileID: 114324438872242900, guid: fed7368b971572f4e8af9adbdbff68c1,
-    type: 3}
-  _speed: 50
-  _cooldownReducePerLevel: 0.2
---- !u!114 &239923780952084078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 239923780952083985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5767cf1f702d66c41b7d346d4b624409, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cooldownSeconds: 1
-  _level: 2
-  _radiusPerLevel: 3
-  _timeToPlayer: 0.5
---- !u!114 &239923780952084077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 239923780952083985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebc77ee15bbde8841b7a5e1b33cb3ca6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cooldownSeconds: 2
-  _level: 2
-  _slowerPerLevel: 0.3
-  _effectTimeSec: 1
 --- !u!1001 &239923779486841255
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -414,6 +385,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 239923779725033335}
     m_Modifications:
+    - target: {fileID: 23375891436054032, guid: cb2e9fbc88a6e9a4d8bc05e000c54b82,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 966d293bd4cd9c545af3e28781a53369, type: 2}
     - target: {fileID: 4716828398957222, guid: cb2e9fbc88a6e9a4d8bc05e000c54b82, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -446,11 +422,6 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 23375891436054032, guid: cb2e9fbc88a6e9a4d8bc05e000c54b82,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 966d293bd4cd9c545af3e28781a53369, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb2e9fbc88a6e9a4d8bc05e000c54b82, type: 3}
 --- !u!1 &238937204430478555 stripped

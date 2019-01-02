@@ -11,15 +11,6 @@ public class CollectPower : PowerBase
     [SerializeField]
     private float _timeToPlayer = 0.5f;
     
-    public void Update()
-    {
-        if (Input.GetKey(KeyCode.L))
-        {
-            base.Use();
-        }
-        base.UpdateFrame();
-    }
-    
     protected override void UseIntern()
     {
         MoveController moveController = GameObject.FindObjectOfType<MoveController>();
@@ -36,7 +27,7 @@ public class CollectPower : PowerBase
         foreach (BonusPoint point in GameObject.FindObjectsOfType<BonusPoint>())
         {
             float distanceSqr = (transform.position - point.transform.position).sqrMagnitude;
-            if (distanceSqr < _radiusPerLevel * (_level + 1))
+            if (distanceSqr < _radiusPerLevel * (Level + 1))
             {
                 result.Add(point);
             }

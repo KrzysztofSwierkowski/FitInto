@@ -23,15 +23,7 @@ public class MissilePower : PowerBase
             Debug.LogError("MissilePrefab is not set");
         }
     }
-
-    public void Update()
-    {
-        if(Input.GetKey(KeyCode.K))
-        {
-            base.Use();
-        }
-        base.UpdateFrame();
-    }
+    
 
     protected override void UseIntern()
     {
@@ -43,7 +35,7 @@ public class MissilePower : PowerBase
 
     protected override void SetCooldown()
     {
-        Cooldown = TimeSpan.FromSeconds(_cooldownSeconds - _cooldownSeconds * _cooldownReducePerLevel * _level);
+        Cooldown = BasicCooldown - BasicCooldown * _cooldownReducePerLevel * Level;
         Debug.Log(Cooldown);
     }
 }

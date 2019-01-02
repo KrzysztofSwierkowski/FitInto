@@ -4,28 +4,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class PowerBase : MonoBehaviour {
+    
+    [SerializeField]
+    public float BasicCooldown;
 
     [SerializeField]
-    protected double _cooldownSeconds;
-    [SerializeField]
-    protected int _level;
+    public Sprite Image;
+    
+    public int Level { get; set; }
+    
+    public float Cooldown { get; protected set; }
 
-    public TimeSpan Cooldown { get; protected set; }
-
-    protected void UpdateFrame()
+    public void Update()
     {
-        if (Cooldown <= TimeSpan.Zero)
+        if (Cooldown <= 0)
         {
-            Cooldown = TimeSpan.Zero;
+            Cooldown = 0;
             return;
         }
-        Cooldown -= TimeSpan.FromSeconds(Time.deltaTime);
+        Cooldown -= Time.deltaTime;
     }
 
 
     public void Use()
     {
-        if (Cooldown > TimeSpan.Zero)
+        if (Cooldown > 0)
         {
             return;
         }
@@ -35,7 +38,7 @@ public abstract class PowerBase : MonoBehaviour {
 
     protected virtual void SetCooldown()
     {
-        Cooldown = TimeSpan.FromSeconds(_cooldownSeconds);
+        Cooldown = BasicCooldown;
     }
 
     protected abstract void UseIntern();

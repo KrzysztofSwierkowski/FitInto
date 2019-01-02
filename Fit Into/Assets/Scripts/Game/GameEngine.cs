@@ -10,11 +10,11 @@ public class GameEngine : MonoBehaviour
 
     public static GameEngine Instance { get; private set; }
 
-    public PlayerStatisticsPoints Stats
+    public GameSettingsManager GameSettingsManager
     {
         get
         {
-            return GameObject.FindObjectOfType<PlayerStatisticsPoints>();
+            return GameObject.FindObjectOfType<GameSettingsManager>();
         }
     }
 
@@ -23,6 +23,14 @@ public class GameEngine : MonoBehaviour
         get
         {
             return GameObject.FindObjectOfType<MoveController>();
+        }
+    }
+
+    public PowerController PowerController
+    {
+        get
+        {
+            return GameObject.FindObjectOfType<PowerController>();
         }
     }
 
@@ -60,6 +68,7 @@ public class GameEngine : MonoBehaviour
                     MoveController.ResetState();
                     ShapeController.ResetState();
                     PointsController.ResetState();
+                    PowerController.ResetStatus();
                     GameObject.FindObjectOfType<WallBuilder>().ResetState();
                     GameObject.FindObjectOfType<BonusBuilder>().ResetState();
                     GameObject.FindObjectOfType<AudioManager>().ResetMusic();
@@ -67,7 +76,7 @@ public class GameEngine : MonoBehaviour
                 }
             case GameStatus.GameOver:
                 {
-                    Stats.AddResult(PointsController.Points);
+                    GameSettingsManager.AddNewPointsResult(PointsController.Points);
                     GameObject.FindObjectOfType<WallBuilder>().ResetState();
                     GameObject.FindObjectOfType<BonusBuilder>().ResetState();
                     break;
@@ -83,4 +92,5 @@ public class GameEngine : MonoBehaviour
     {
         Instance = this;
     }
+    
 }

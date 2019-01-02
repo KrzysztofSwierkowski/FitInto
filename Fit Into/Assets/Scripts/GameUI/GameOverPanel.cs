@@ -28,6 +28,6 @@ public class GameOverPanel : MonoBehaviour
     private void OnEnable()
     {
         _textCurrentScore.text = GameEngine.Instance.PointsController.Points.ToString();
-        _textBestScore.text = GameEngine.Instance.Stats.GetResults().Max().ToString();
+        _textBestScore.text = GameEngine.Instance.GameSettingsManager.Load().Stats.Max().ToString();
     }
 }
