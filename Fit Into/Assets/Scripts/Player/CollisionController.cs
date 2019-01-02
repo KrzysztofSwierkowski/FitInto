@@ -35,6 +35,10 @@ public class CollisionController : MonoBehaviour
             {
                 GameEngine.Instance.SetGameStatus(GameStatus.GameOver);
             }
+            else
+            {
+                GameObject.FindObjectOfType<AudioManager>().PlayWall();
+            }
             return true;
         }
         return false;
@@ -45,7 +49,6 @@ public class CollisionController : MonoBehaviour
         Wall wall = other.GetComponent<Wall>();
         if (wall != null)
         {
-            FindObjectOfType<AudioManager>().Play("WallEntry");
             GetComponent<ShapeController>().DecrementWallCounter();
             GameObject.FindObjectOfType<WallBuilder>().DecrementWallCounter();
             return true;

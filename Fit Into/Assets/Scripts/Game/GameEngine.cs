@@ -62,6 +62,7 @@ public class GameEngine : MonoBehaviour
                     PointsController.ResetState();
                     GameObject.FindObjectOfType<WallBuilder>().ResetState();
                     GameObject.FindObjectOfType<BonusBuilder>().ResetState();
+                    GameObject.FindObjectOfType<AudioManager>().ResetMusic();
                     break;
                 }
             case GameStatus.GameOver:

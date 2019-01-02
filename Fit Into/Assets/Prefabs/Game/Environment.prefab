@@ -452,6 +452,7 @@ GameObject:
   - component: {fileID: 2040377831956303296}
   - component: {fileID: 2040377831956303299}
   - component: {fileID: 8923222122556465416}
+  - component: {fileID: 2532298905067522640}
   m_Layer: 0
   m_Name: Environment
   m_TagString: Untagged
@@ -540,6 +541,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16c8a25d81b06264aa0022a5176e0695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2532298905067522640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040377831956303297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a1644135cd7c24d91ae68d7dc07ad1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _theme:
+    name: 
+    clip: {fileID: 8300000, guid: 4391c5b42d2c34e46806b41a569d8d76, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  _wall:
+    name: 
+    clip: {fileID: 8300000, guid: d04f28be8dcd508438ca7a62bf2ecb80, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!1 &2040377832250712226
 GameObject:
   m_ObjectHideFlags: 0

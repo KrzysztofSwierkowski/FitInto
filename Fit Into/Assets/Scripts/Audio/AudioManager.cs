@@ -4,50 +4,38 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    [SerializeField]
+    private Sound _theme;
 
-    public Sound[] sounds;
-
-    public static AudioManager instance;
+    [SerializeField]
+    private Sound _wall;
 
     // Start is called before the first frame update
     void Awake()
     {
-        if (instance == null)
-            instance = this;
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        DontDestroyOnLoad(gameObject);
-
-        foreach (Sound s in sounds)
-        {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
-
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
-        }
+        InitializeSound(_theme);
+        InitializeSound(_wall);
     }
 
-    void Start()
+    private void InitializeSound(Sound sound)
     {
-        Play("Theme");
+        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = sound.clip;
+        audioSource.volume = sound.volume;
+        audioSource.pitch = sound.pitch;
+        audioSource.loop = sound.loop;
+        sound.source = audioSource;
     }
 
-    public void Play (string name)
+    public void ResetMusic()
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-        if (s == null)
-        {
-            Debug.LogWarning("Sound: " + name + " not found!");
-            return;
-        }
+        _theme.source.Stop();
+        _theme.source.Play();
+    }
 
-        s.source.Play();
+    public void PlayWall()
+    {
+        _wall.source.Play();
     }
 
 }
